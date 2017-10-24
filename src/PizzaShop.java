@@ -26,23 +26,22 @@ public class PizzaShop {
         Scanner keyType = new Scanner(System.in);
         PizzaManager pizzaManager = new PizzaManager();
         displayGreeting();
-        while (true) {
+
+        do {
             askSize();
             pizzaManager.add(newPizza());
             System.out.println("Would you like to experience the beauty of the next flavor town?");
             System.out.println("Y or N");
-            if (isNo(keyType.nextLine())) {
-                System.out.println("Thank you for your order.");
-                System.out.println("You ordered:");
-                pizzaManager.displayPizzas();
-                System.out.println("Your total comes to $" + pizzaManager.totalCost());
-                System.out.println("Would you like to modify your order?");
-                if (isYes(keyType.nextLine())) {
-                    modifyOrder(pizzaManager);
-                }
-                break;
-            }
+        } while(isYes(keyType.nextLine()));
+
+        System.out.println("You ordered:");
+        pizzaManager.displayPizzas();
+        System.out.println("Your total comes to $" + pizzaManager.totalCost());
+        System.out.println("Would you like to modify your order?");
+        if (isYes(keyType.nextLine())) {
+            modifyOrder(pizzaManager);
         }
+
         System.out.println("Thank you for your order.");
         System.out.println("You ordered:");
         pizzaManager.displayPizzas();
@@ -81,18 +80,14 @@ public class PizzaShop {
         if (isNo(keyType.nextLine())) {
             return;
         }
-        System.out.println("What topping would you like?");
-        Pizza.showAvailableToppings();
-        while (true) {
+
+        do {
+            System.out.println("What topping would you like?");
+            Pizza.showAvailableToppings();
             pizza.addTopping(keyType.nextLine());
             System.out.println("Would you like another topping?");
             System.out.println("Y or N");
-            if (isYes(keyType.nextLine())) {
-                System.out.println("What topping would you like?");
-                continue;
-            }
-            break;
-        }
+        } while (isYes(keyType.nextLine()));
     }
 
     public static void askToppingsAndRemove(Pizza pizza, Scanner keyType) {
@@ -101,18 +96,14 @@ public class PizzaShop {
         if (isNo(keyType.nextLine())) {
             return;
         }
-        System.out.println("Which topping would you like to remove?");
-        Pizza.showAvailableToppings();
-        while (true) {
+
+        do {
+            System.out.println("Which topping would you like to remove?");
+            Pizza.showAvailableToppings();
             pizza.removeTopping(keyType.nextLine());
             System.out.println("Do you want to remove another topping");
             System.out.println("Y or N");
-            if (isYes(keyType.nextLine())) {
-                System.out.println("Which topping would you like to remove?");
-                continue;
-            }
-            break;
-        }
+        } while (isYes(keyType.nextLine()));
     }
 
     public static boolean isYes(String s) {
@@ -132,20 +123,19 @@ public class PizzaShop {
     public static void modifyOrder(PizzaManager pizzaManager) {
         Scanner keyType = new Scanner(System.in);
         int index = 0;
-        while (true) {
+        do {
             System.out.println("What action would you like to take?");
             System.out.println("1. Remove a pizza.");
             System.out.println("2. Modify toppings");
-            switch (keyType.nextInt()) {
+            switch(keyType.nextInt()) {
                 default:
                     keyType.nextLine();
-                case 1: //remove a pizza
+                case 1:
                     pizzaManager.displayPizzas();
                     System.out.println("Which pizza would you like to remove?");
                     pizzaManager.remove(keyType.nextInt());
                     keyType.nextLine();
-                    break;
-                case 2: //add or remove toppings
+                case 2:
                     pizzaManager.displayPizzas();
                     System.out.println("Which pizza do you want to modify?");
                     index = keyType.nextInt();
@@ -154,10 +144,9 @@ public class PizzaShop {
                     askToppingsAndRemove(pizzaManager.get(index), keyType);
                     break;
             }
+
             System.out.println("Would you like to make another modification?");
-            if (isNo(keyType.nextLine()))
-                break;
-        }
+        } while(!isNo(keyType.nextLine()));
     }
 
 }

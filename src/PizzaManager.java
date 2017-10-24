@@ -24,6 +24,7 @@ public class PizzaManager {
     public Pizza get(int index) {
         return pizzas.get(index);
     }
+
     public double totalCost() {
         double cost = 0;
         for (Pizza pizza : pizzas) {
@@ -33,7 +34,9 @@ public class PizzaManager {
     }
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-
-        return stringBuilder.toString();
+        for (Pizza pizza : pizzas) {
+            stringBuilder.append(pizza).append(" ");
+        }
+        return stringBuilder.toString().trim();
     }
 }

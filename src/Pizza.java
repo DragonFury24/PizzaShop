@@ -105,7 +105,7 @@ public class Pizza {
             stringBuilder.append(toppings.get(i)).append(", ");
         }
         stringBuilder.append("and ").append(StringUtils.capitalizeWords(toppings.get(toppings.size() - 1)));
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 
     /**
