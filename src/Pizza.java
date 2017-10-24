@@ -132,9 +132,9 @@ public class Pizza {
 
     private String expandAbbreviation(String s) {
         if (s.equalsIgnoreCase("freshmozz"))
-            s = "fresh mozzarella";
+            return "fresh mozzarella";
         else if (s.equalsIgnoreCase("extracheese"))
-            s = "extra cheese";
+            return "extra cheese";
         return s;
     }
     /**
